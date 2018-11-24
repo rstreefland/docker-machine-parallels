@@ -374,21 +374,6 @@ func (d *Driver) PreCreateCheck() error {
 		return nil
 	}
 
-	// Check Parallels Desktop edition
-	edit, err := getParallelsEdition()
-	if err != nil {
-		return err
-	}
-
-	log.Debugf("Found Parallels Desktop version: %d, edition: %s", ver, edit)
-
-	switch edit {
-	case "pro", "business":
-		break
-	default:
-		return fmt.Errorf("Docker Machine can be used only with Parallels Desktop Pro or Business edition. You use: %s edition", edit)
-	}
-
 	// Check whether the host is connected to Shared network
 	ok, err := isSharedConnected()
 	if err != nil {
